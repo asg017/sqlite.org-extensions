@@ -35,6 +35,7 @@ fts5: $(TARGET_FTS5)
 
 $(TARGET_FTS5): sqlite/fts5.c $(prefix)
 	$(CC) \
+		 $(CFLAGS) \
 		-fPIC -shared \
 		-Isqlite \
 		-O3 -Lsqlite/.libs \
@@ -99,6 +100,7 @@ EXTENSIONS_MISC: $(MISC_NODEPS) $(MISC_Z)
 define MISC_NODEPS_template
 $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 	$(CC) \
+		$(CFLAGS) \
 		-fPIC -shared \
 		-Isqlite \
 		-Isqlite/src \
@@ -107,7 +109,7 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	$(CC) -Isqlite -Isqlite/src -DSQLITE_CORE \
+	$(CC)  $(CFLAGS) -Isqlite -Isqlite/src -DSQLITE_CORE \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
@@ -119,6 +121,7 @@ $(foreach prog,$(MISC_NODEPS),$(eval $(call MISC_NODEPS_template,$(prog))))
 define MISC_Z_template
 $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 	$(CC) \
+		 $(CFLAGS) \
 		-fPIC -shared \
 		-Isqlite \
 		-Isqlite/src \
@@ -128,7 +131,7 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	$(CC) -Isqlite -Isqlite/src -DSQLITE_CORE -lz \
+	$(CC)  $(CFLAGS) -Isqlite -Isqlite/src -DSQLITE_CORE -lz \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
