@@ -140,12 +140,11 @@ jobs:
   #          const script = require('.github/workflows/upload-deno-assets.js')
   #          return await script({github, context})
   upload-extensions:
-    needs:
-      [
+    needs: [
         build-linux-x86_64-extension,
         build-macos-x86_64-extension,
         build-macos-aarch64-extension,
-        build-windows-x86_64-extension,
+        #build-windows-x86_64-extension,
       ]
     permissions:
       contents: write
