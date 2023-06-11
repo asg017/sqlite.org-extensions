@@ -2,7 +2,7 @@
 
 set -euo pipefail xtrace
 
-if [[ -n $(git status --porcelain | grep -v VERSION | grep -v vendor/faiss) ]]; then
+if [[ -n $(git status --porcelain | grep -v VERSION |  grep -v "M sqlite$") ]]; then
     echo "❌ There are other un-staged changes to the repository besides VERSION"
     exit 1
 fi
