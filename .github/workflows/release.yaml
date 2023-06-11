@@ -173,13 +173,13 @@ jobs:
       - uses: asg017/upload-spm@main
         id: upload-spm
         with:
-          name: sqlite-hello
+          name: sqlite.org-extensions
           github-token: ${{ secrets.GITHUB_TOKEN }}
           platforms: |
             linux-x86_64:   ${{ env.ARTIFACT_LINUX_X86_64_EXTENSION }}/*
             macos-x86_64:   ${{ env.ARTIFACT_MACOS_X86_64_EXTENSION }}/*
             macos-aarch64:  ${{ env.ARTIFACT_MACOS_AARCH64_EXTENSION }}/*
-            windows-x86_64: ${{ env.ARTIFACT_WINDOWS_X86_64_EXTENSION }}/*
+          #windows-x86_64: ${{ env.ARTIFACT_WINDOWS_X86_64_EXTENSION }}/*
   #upload-checksums:
   #  needs: [upload-extensions, upload-deno]
   #  runs-on: ubuntu-latest
