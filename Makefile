@@ -109,10 +109,10 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
 	$(CC) -Isqlite -Isqlite/src -DSQLITE_CORE \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
-	ar rcs $@ $(prefix)/$(1).o
+	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
 $(1)-loadable: $(prefix)/$(1).$(LOADABLE_EXTENSION)
-$(1)-static: $(prefix)/$(1).$(LOADABLE_EXTENSION)
+$(1)-static: $(prefix)/$(1).a
 endef
 $(foreach prog,$(MISC_NODEPS),$(eval $(call MISC_NODEPS_template,$(prog))))
 
@@ -124,13 +124,23 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 		-Isqlite/src \
 		-O3 \
 		-lz \
-		-I/usr/local/opt/zlib/include \
-		-L/usr/local/opt/zlib/lib \
 		$(MISC_PATH)/$(1).c \
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
-$(1): $(prefix)/$(1).$(LOADABLE_EXTENSION)
+$(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
+	$(CC) -Isqlite -Isqlite/src -DSQLITE_CORE -lz \
+		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
+	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
+
+$(prefix)/$(1).h: include/$(1).h
+	cp include/$(1).h $(prefix)/$(1).h
+
+$(1)-loadable: $(prefix)/$(1).$(LOADABLE_EXTENSION)
+$(1)-static: $(prefix)/$(1).a $(prefix)/$(1).h
 endef
+
+#-I/usr/local/opt/zlib/include \
+#-L/usr/local/opt/zlib/lib \
 
 $(foreach prog,$(MISC_Z),$(eval $(call MISC_Z_template,$(prog))))
 
