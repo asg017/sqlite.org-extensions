@@ -92,10 +92,10 @@ MISC_NODEPS = anycollseq \
   wholenumber \
   zorder
 
-MISC_Z = compress sqlar zipfile vfslog dbdump
-# MISC_TODO dbdump memtrace mmapwarm normalize scrub vfslog
+MISC_Z = compress sqlar zipfile
+# MISC_TODO dbdump memtrace mmapwarm normalize scrub vfslog dbdump
 
-EXTENSIONS_MISC: $(MISC_NODEPS) $(MISC_Z)
+EXTENSIONS_MISC=$(MISC_NODEPS) $(MISC_Z)
 
 define MISC_NODEPS_template
 $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
@@ -115,6 +115,8 @@ $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
 
 $(1)-loadable: $(prefix)/$(1).$(LOADABLE_EXTENSION)
 $(1)-static: $(prefix)/$(1).a
+$(1): $(prefix)/$(1).$(LOADABLE_EXTENSION) $(prefix)/$(1).a
+
 endef
 $(foreach prog,$(MISC_NODEPS),$(eval $(call MISC_NODEPS_template,$(prog))))
 
@@ -140,6 +142,7 @@ $(prefix)/$(1).h: include/$(1).h
 
 $(1)-loadable: $(prefix)/$(1).$(LOADABLE_EXTENSION)
 $(1)-static: $(prefix)/$(1).a $(prefix)/$(1).h
+$(1): $(1)-loadable $(1)-static
 endef
 
 #-I/usr/local/opt/zlib/include \
