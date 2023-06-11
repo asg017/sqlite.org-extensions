@@ -145,10 +145,12 @@ endef
 $(foreach prog,$(MISC_Z),$(eval $(call MISC_Z_template,$(prog))))
 
 
+publish-release:
+	./scripts/publish_release.sh
 
 all: $(EXTENSIONS_MISC) $(TARGET_FTS5)
 
 clean:
 	rm -rf dist/
 
-.PHONY: all $(EXTENSIONS_MISC) clean
+.PHONY: all $(EXTENSIONS_MISC) clean publish-release
