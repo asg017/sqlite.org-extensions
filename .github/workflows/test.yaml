@@ -51,7 +51,7 @@ jobs:
           name: ${{ env.ARTIFACT_MACOS_AARCH64_EXTENSION }}
           path: dist/*
   build-windows-x86_64-extension:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -59,7 +59,7 @@ jobs:
       - run: find .
         working-directory: sqlite
         shell: bash
-      - run: autoreconf -fi && ./configure && make sqlite3.c fts5.c
+      - run: ./configure && make sqlite3.c fts5.c
         working-directory: sqlite
         shell: bash
       - run: make all
