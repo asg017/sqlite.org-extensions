@@ -1,5 +1,11 @@
 # `sqlite.org-extensions`
 
+The [official SQLite source code repository](https://sqlite.org/src/doc/trunk/README.md) has dozens of SQLite extensions for various real-world, debugging, and testing purposes. They are just plain C files that you normally have to compile yourself.
+
+So `sqlite.org-extensions` aims to provide pre-compiled and re-distributed version of most of this extensions, so you don't have to worry about building it yourself.
+
+This project is still early, not complete yet. The extensions are provided "as-is" with the exact same source code as listed in the official repository. While the SQLite codebase is in the public domain, consider this specific repository MIT + Apache 2.0 licensed.
+
 | Extension    | Source                                                                                | Description |
 | ------------ | ------------------------------------------------------------------------------------- | ----------- |
 | anycollseq   | [`ext/misc/anycollseq.c`](https://sqlite.org/src/file?name=ext/misc/anycollseq.c)     |             |

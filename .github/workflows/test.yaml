@@ -59,9 +59,9 @@ jobs:
       - run: find .
         working-directory: sqlite
         shell: bash
-      - run: ./configure && make sqlite3.c fts5.c
+      - run: ./configure && nmake /f Makefile.msc sqlite3.c fts5.c
         working-directory: sqlite
-        shell: bash
+        #shell: bash
       - run: make all
       - uses: actions/upload-artifact@v3
         with:
