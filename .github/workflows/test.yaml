@@ -69,6 +69,7 @@ jobs:
       #  working-directory: sqlite/
       #  shell: bash
       #  # nmake /f Makefile.msc | sqlite3.c fts5.c
+      - run: choco install mingw
       - run: make all-no-fts5
       - uses: actions/upload-artifact@v3
         with:
