@@ -60,12 +60,12 @@ jobs:
         working-directory: sqlite
         shell: bash
         #- uses: microsoft/setup-msbuild@v1.1
-      - run: |
-          ./configure
-          make all
-        working-directory: sqlite/
-        shell: bash
-        # nmake /f Makefile.msc | sqlite3.c fts5.c
+      #- run: |
+      #    ./configure
+      #    make all
+      #  working-directory: sqlite/
+      #  shell: bash
+      #  # nmake /f Makefile.msc | sqlite3.c fts5.c
       - run: make all
       - uses: actions/upload-artifact@v3
         with:
