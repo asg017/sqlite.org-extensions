@@ -103,13 +103,12 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 		$(CFLAGS) \
 		-fPIC -shared \
 		-Isqlite \
-		-Isqlite/src \
 		-O3 \
 		$(MISC_PATH)/$(1).c \
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	$(CC)  $(CFLAGS) -Isqlite -Isqlite/src -DSQLITE_CORE \
+	$(CC)  $(CFLAGS) -Isqlite -DSQLITE_CORE \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
@@ -126,14 +125,13 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 		 $(CFLAGS) \
 		-fPIC -shared \
 		-Isqlite \
-		-Isqlite/src \
 		-O3 \
 		-lz \
 		$(MISC_PATH)/$(1).c \
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	$(CC)  $(CFLAGS) -Isqlite -Isqlite/src -DSQLITE_CORE -lz \
+	$(CC)  $(CFLAGS) -Isqlite -DSQLITE_CORE -lz \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
