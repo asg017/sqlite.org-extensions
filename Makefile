@@ -153,6 +153,7 @@ publish-release:
 	./scripts/publish_release.sh
 
 all: $(EXTENSIONS_MISC) $(TARGET_FTS5)
+all-no-fts5: $(EXTENSIONS_MISC)
 
 clean:
 	rm -rf dist/
