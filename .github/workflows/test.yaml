@@ -61,7 +61,6 @@ jobs:
         shell: bash
         #- uses: microsoft/setup-msbuild@v1.1
       - run: choco install -y msys2
-      - run: refreshenv
       - run: |
           autoconf
           ./configure
