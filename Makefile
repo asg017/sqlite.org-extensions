@@ -37,7 +37,7 @@ $(TARGET_FTS5): sqlite/fts5.c $(prefix)
 	gcc \
 		 $(CFLAGS) \
 		-fPIC -shared \
-		-Isqlite \
+		-Isqlite -Iinclude \
 		-O3 -Lsqlite/.libs \
 		$< \
 		-o $@
@@ -102,13 +102,13 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 	gcc \
 		$(CFLAGS) \
 		-fPIC -shared \
-		-Isqlite \
+		-Isqlite -Iinclude \
 		-O3 \
 		$(MISC_PATH)/$(1).c \
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	gcc  $(CFLAGS) -Isqlite -DSQLITE_CORE \
+	gcc  $(CFLAGS) -Isqlite -Iinclude -DSQLITE_CORE \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
@@ -124,14 +124,14 @@ $(prefix)/$(1).$(LOADABLE_EXTENSION): $(MISC_PATH)/$(1).c $(prefix)
 	gcc \
 		 $(CFLAGS) \
 		-fPIC -shared \
-		-Isqlite \
+		-Isqlite -Iinclude \
 		-O3 \
 		-lz \
 		$(MISC_PATH)/$(1).c \
 		-o $(prefix)/$(1).$(LOADABLE_EXTENSION)
 
 $(prefix)/$(1).a: $(MISC_PATH)/$(1).c $(prefix)
-	gcc  $(CFLAGS) -Isqlite -DSQLITE_CORE -lz \
+	gcc  $(CFLAGS) -Isqlite -Iinclude -DSQLITE_CORE -lz \
 		-O3 -c  $(MISC_PATH)/$(1).c -o $(prefix)/$(1).o
 	ar rcs $(prefix)/$(1).a $(prefix)/$(1).o
 
