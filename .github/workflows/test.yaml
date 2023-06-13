@@ -60,7 +60,8 @@ jobs:
         working-directory: sqlite
         shell: bash
         #- uses: microsoft/setup-msbuild@v1.1
-      - run: choco install -y msys2
+      - run: choco install -y cygwin
+      - run: C:\\tools\\cygwin\\cygwinsetup.exe -q -P make,unzip,automake,autoconf,zip
       - run: |
           autoconf
           ./configure
