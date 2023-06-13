@@ -60,7 +60,8 @@ jobs:
         working-directory: sqlite
         shell: bash
       - uses: microsoft/setup-msbuild@v1.1
-      - run: nmake /f Makefile.msc sqlite3.c fts5.c
+      - run: make sqlite3.c fts5.c
+        # nmake /f Makefile.msc
         working-directory: sqlite
 
       - run: make all
