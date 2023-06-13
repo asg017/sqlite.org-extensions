@@ -63,7 +63,7 @@ jobs:
       - run: choco install -y cygwin
       - run: C:\\tools\\cygwin\\cygwinsetup.exe -q -P make,unzip,automake,autoconf,zip
       - run: |
-          autoconf
+          autoconf.exe
           ./configure
           make all
         working-directory: sqlite/
